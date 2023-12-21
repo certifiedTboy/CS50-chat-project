@@ -1,0 +1,74 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-1"></div>
+    <div class="col-10">
+      <div class="message-box">
+        <h2 class="room-text">Chat Room: {{room}}</h2>
+
+        <div class="messages" id="messages"></div>
+        <div class="form-group">
+          <input
+            type="text"
+            placeholder="Message"
+            name="message"
+            class="form-control chat-input"
+            id="message"
+          />
+
+          <button
+            class="send-btn"
+            type="button"
+            name="send"
+            id="send-btn"
+            onclick="sendMessage()"
+          >
+            <i class="fa-regular fa-paper-plane"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-1"></div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  const socketio = io();
+
+  const messages = document.getElementById("messages");
+  const usersList = document.getElementById("users");
+
+  const createMessage = (name, msg) => {
+    let content;
+
+    content = `<div class="text"> 
+      <div>
+      <strong>${name} </strong>: 
+        ${msg}
+      </div> 
+        <div class="muted"> 
+          <p class="time">  ${new Date().toLocaleString()} </p>
+        </div>
+      </div>
+    `;
+
+    messages.innerHTML += content;
+  };
+
+  socketio.on("message", (data) => {
+    createMessage(data.name, data.message);
+  });
+
+  const sendMessage = () => {
+    const message = document.getElementById("message");
+    if (message.value == "") {
+      return;
+    }
+
+    socketio.emit("message", { data: message.value });
+    message.value = "";
+  };
+</script>
+
+{% endblock %}

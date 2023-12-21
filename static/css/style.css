@@ -1,0 +1,102 @@
+body {
+  background-color: rgb(0, 0, 28) !important;
+}
+
+.form-box {
+  background-color: rgb(45, 45, 69);
+  width: 100%;
+  padding: 30px;
+  height: 80vh;
+  border-radius: 50px;
+}
+
+.input2 {
+  background: transparent !important;
+  color: #fff !important;
+}
+.input2::placeholder {
+  color: #fdd3d3 !important;
+  opacity: 0.2 !important;
+}
+
+.select {
+  font-size: 15px;
+  font-weight: 300 !important;
+}
+.option {
+  background: transparent !important;
+  color: #fdd3d3 !important;
+}
+
+.form-box h3,
+p {
+  color: #fff;
+}
+
+.form-box p {
+  font-weight: 600;
+}
+
+.btn-div {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 60px;
+}
+
+.btn-div button {
+  width: 100%;
+  font-weight: 600;
+}
+
+.message-box {
+  background-color: transparent !important;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.messages {
+  overflow-y: scroll;
+  max-height: 1200px;
+  flex: 1;
+  width: 100%;
+}
+
+.chat-input {
+  width: 90% !important;
+  display: inline-block !important;
+}
+
+.send-btn {
+  display: inline-block;
+  background: none;
+  border: none;
+  font-size: 25px;
+  color: #dc6e00;
+}
+
+.room-text {
+  text-align: center;
+  color: #fff;
+}
+
+.text {
+  background-color: rgb(0, 157, 205);
+  width: fit-content;
+  margin-bottom: 20px;
+  padding: 10px 30px 10px 10px;
+  border-radius: 0 20px;
+}
+
+.text2 {
+  background-color: rgb(247, 0, 255);
+  width: fit-content;
+  margin-bottom: 20px;
+  padding: 10px 30px 10px 10px;
+  border-radius: 0 20px;
+}
+
+.time {
+  font-size: 10px;
+}

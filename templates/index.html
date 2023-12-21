@@ -1,0 +1,55 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-3 col-sm-2"></div>
+    <div class="col-lg-6 col-sm-8">
+      <div class="form-box">
+        <h3 class="mb-2 text-center">
+          CS50 CHAT <i class="fa-solid fa-comments"></i>
+        </h3>
+
+        <p class="text-center mb-5">Join a room</p>
+
+        {% if error %}
+        <div class="alert alert-danger" role="alert">{{error}}</div>
+
+        {% endif %}
+
+        <form method="POST" class="chat-form">
+          <div class="form-group mb-3">
+            <input
+              type="text"
+              placeholder="Pick a Username"
+              name="name"
+              value="{{name}}"
+              class="form-control input2"
+            />
+          </div>
+
+          <div class="join form-group mb-3">
+            <div class="select">
+              <select class="form-control form-select option" name="room">
+                <option value="" disabled selected hidden>Choose a Room</option>
+                {% for room in rooms %}
+
+                <option value="{{room}}">{{room}}</option>
+
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+
+          <div class="btn-div">
+            <button type="submit" class="btn btn-primary" name="join">
+              Join a Room
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="col-lg-3 col-sm-2"></div>
+  </div>
+</div>
+
+{% endblock %}
