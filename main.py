@@ -4,6 +4,8 @@ from flask_socketio import join_room, leave_room, send, SocketIO
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "ilovecs50"
 socketio = SocketIO(app)
+
+
 available_rooms = ["Comedy", "Sport", "Movies"]
 
 rooms = {
@@ -24,6 +26,16 @@ rooms = {
         }
 }
 
+# check if a user with a particular already exist in a room
+def check_user_exist(room, username):
+    room_users = rooms[room]["room_users"]
+    return username.title() in room_users
+
+# ensure users do not exit 10 in a room
+def check_users_limit(room):
+    return len(rooms[room]["room_users"]) >= 10 
+
+
 @app.route("/", methods=["POST", "GET"])
 def home():
     session.clear()
@@ -37,11 +49,17 @@ def home():
         if not room:
             return render_template("index.html", error="Please choose a room to join", rooms=available_rooms)
 
+        if check_user_exist(room, name):
+            return render_template("index.html", error=f"{name} is already in the chat! Please use another name.", rooms=available_rooms)
+        
+        if check_users_limit(room):
+            return render_template("index.html", error="Only 6 users can be permitted in each room, kindly join the next available room", rooms=available_rooms)
+
         elif room not in available_rooms:
             return render_template("index.html", error="Room does not exist", rooms=available_rooms)
    
         session["room"] = room
-        session["name"] = name
+        session["name"] = name.title()
 
         return redirect(url_for("room"))
     
@@ -49,33 +67,41 @@ def home():
 
 @app.route("/room")
 def room():
-    room = session.get("room")
-    name = session.get("name")
-    if not room or not name or room not in rooms:
+    room = session["room"]
+    name = session["name"]
+    
+    if not room:
         return redirect(url_for("home"))
-    return render_template("room.html", room=room)
+    if not name:
+        return redirect(url_for("home"))
+    
+    if available_rooms.count(room) <= 0:
+        return redirect(url_for("home")) 
+    return render_template("room.html", room=room, name=name)
 
 @socketio.on("message")
 def message(data):
-    room = session.get("room")
-    if room not in rooms:
+    room = session["room"]
+    if available_rooms.count(room) <= 0:
         return
     content = {
-        "name": session.get("name"),
+        "name": session["name"],
         "message": data["data"],
     }
 
     send(content, to=room)
 
 @socketio.on("connect")
-def connect(auth):
-    room = session.get("room")
+def connect():
+    room = session["room"]
     name = "T-Bots"
-    user = session.get("name")
+    user = session["name"]
 
-    if not room or not name:
+    if not room:
+        return 
+    if not name:
         return
-    if room not in rooms:
+    if available_rooms.count(room) <= 0:
         leave_room(room)
         return
     
@@ -89,24 +115,22 @@ def connect(auth):
     send(content, to=room)
     rooms[room]["members"] += 1
     rooms[room]["room_users"].append(user)
-    # socketio.emit("room_users", rooms[room]["room_users"], to=room)
+
 
 @socketio.on("disconnect")
 def disconnect():
-    room = session.get("room")
+    room = session["room"]
     name = "T-Bots"
-    user = session.get("name")
+    user = session["name"]
     leave_room(room)
 
-    if room in rooms:
+    if available_rooms.count(room) >= 1:
         rooms[room]["members"] -= 1
         rooms[room]["room_users"].remove(user)
-        if rooms[room]["members"] <= 0:
-            del rooms[room]
 
     content = {
         "name": name,
-        "message":user + " has entered the room" ,
+        "message":user + " has left the room" ,
     }
     send(content, to=room)
 
