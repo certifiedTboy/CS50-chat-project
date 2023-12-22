@@ -1,2 +1,6 @@
 Flask
 flask_socketio
+taipy
+docker
+gpt-engineer
+marshmallow-sqlalchemy==0.26.1
