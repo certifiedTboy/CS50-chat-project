@@ -1,4 +1,0 @@
-Flask
-Flask-Session
-requests
-flask_socketio
