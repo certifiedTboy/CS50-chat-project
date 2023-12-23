@@ -135,4 +135,4 @@ def disconnect():
     send(content, to=room)
 
 if __name__ == "__main__":
-    socketio.run(app, debug=True)
+    socketio.run(app, host="0.0.0.0", port=8080, debug=True)
