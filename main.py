@@ -46,6 +46,9 @@ def home():
         if not name:
             return render_template("index.html", error="Please enter a name.", rooms=available_rooms)
         
+        if len(name) > 10:
+            return render_template("index.html", error="Name must be less than 10 characters.", rooms=available_rooms)
+        
         if not room:
             return render_template("index.html", error="Please choose a room to join", rooms=available_rooms)
 
