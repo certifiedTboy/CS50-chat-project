@@ -68,7 +68,7 @@ $ git clone https://github.com/certifiedTboy/CS50-chat-project
 $ cd CS50-chat-project
 
 # Install dependencies
-$ pip install
+$ pip install -r requirements.txt
 
 # Run the project
 $ python main.py (Production server)
