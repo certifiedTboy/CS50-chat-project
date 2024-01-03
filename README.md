@@ -19,6 +19,7 @@
 - [Introduction](#Introduction)
 - [Technologies](#Technologies)
 - [Get Started](#Get-Started)
+- [Usage and Functionality](#)
 
 <br>
 
@@ -78,5 +79,46 @@ $ python main.py (Development server)
 # view on cross-platform on  http://192.168.121.92:8080
 # view live production demo on https://cs50-chat-project.onrender.com
 ```
+
+## Usage and Functionalities
+
+### Backend Logic
+
+The chat application is built using Flask as a web framework and SocketIO for real time communication
+
+The main application logic is contained in the main.py file which is located in the root folder of the application.
+
+The application utlizes session for temporary storage of user information such as the username
+
+On the home page of the application, a user has to choose a unique username of not more than 10 characters and a particular room he or she wants to join.
+
+There are 3 basic rooms made available to avoid complexity.
+
+A room can only accept 10 users at a time. And users are not permitted to use same username in a particular room
+
+### User Interface
+
+A simple HTML template engine called Jinja2 is used to generate dynamic contents.
+
+The user interface is devided into 3 files. With the base.html serving as the main file holding all meta data and semantic structure of the page.
+
+The index.html file is the home page of the application which is where users can choose their unique username and the room they wish to join
+
+An error message is printed on the home page if at all the user is doing anything wrongly or there is a server related error. This error is returned from the root route of the application which is incharge of rendering the home page of the application.
+
+The real chat on the application occurs in the room.html page. The file also contains the javascript logic that handles the DOM manipulation of the page and implementation of Socket.io implementation.
+
+### Future Improvement and Integration.
+
+As it stands currently, the application doesn't really do much than just seding instant messages in a general group.
+
+More improvements that can be done on the application includes
+
+- Integration of a profanity filter that blocks any form of hate speech or vulgar statement against users
+- Integration of a private chat functionality where users can send direct messages other than the general group chat
+- Users can also have a proper profile picture and profile information to share more information about who they are
+- Integration of AI functionality to make conversations more interactive and worthwhile
+- Integration of proper authentication system and process in order to ensure person using the platforms are real humans and also to ensure security and safety of other users.
+- Integration of database storage to ensure data security, accuracy and persistency.
 
 <a href="#top">Back to top</a>
