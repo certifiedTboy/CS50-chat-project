@@ -2,7 +2,8 @@
  
   &#xa0;
 
-  <!-- <a href="https://usermanagementapi.netlify.app">Demo</a> ---->
+<a href="https://cs50-chat-project.onrender.com">Demo</a>
+
 </div>
 
 <h1 align="center"> CS50 chat (Final project)</h1>
