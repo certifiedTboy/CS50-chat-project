@@ -4,6 +4,8 @@
 
 ##### Description: A simple chat application built with python Flask framework and Flask-socket.io library
 
+##### Live Demo: <a href="https://cs50-chat-project.onrender.com">Live Demo</a>
+
 <div align="center" id="top"> 
  
   &#xa0;
