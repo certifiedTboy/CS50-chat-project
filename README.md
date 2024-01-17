@@ -1,8 +1,12 @@
+# CS50 CHAT
+
+#### Video Demo: <a href="https://drive.google.com/file/d/1A-Ce75Kr73Px27p60mNLGdhzryLswjNp/view?usp=sharing">Video Demo</a>
+
+##### Description: A simple chat application built with python Flask framework and Flask-socket.io library
+
 <div align="center" id="top"> 
  
   &#xa0;
-
-<a href="https://cs50-chat-project.onrender.com">Demo</a>
 
 </div>
 
